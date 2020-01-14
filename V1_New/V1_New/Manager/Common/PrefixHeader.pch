@@ -1,0 +1,90 @@
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#endif /* PrefixHeader_pch */
+
+#define MAS_SHORTHAND
+//define this constant if you want to enable auto-boxing for default syntax
+#define MAS_SHORTHAND_GLOBALS
+
+//第三方库
+#import "AFNetworking.h"
+#import "Masonry.h"
+#import "SVProgressHUD.h"
+#import "SLAPI.h"
+#import "MJExtension.h"
+#import "MJRefresh.h"
+
+//工程文件
+#import "NetWorkManager.h"
+
+
+//扩展类
+#import "UIView+Extensions.h"
+#import "UIColor+Extension.h"
+#import "UIImage+Extensions.h"
+#import "UIFont+Extensions.h"
+
+
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
+//强 弱 引用
+#define SLWeakSelf(A)          __weak  typeof(self)A = self;
+#define SLStrongSelf(A, B)     __strong typeof(self)A = B;
+
+/** iPhone X 适配 **/
+#define SafeAreaTopHeight       (isFullScreen ? 88 : 64)
+#define SafeAreaBottomHeight    (isFullScreen ? 34 : 0)
+#define USER_DEFAULTS           [NSUserDefaults standardUserDefaults]
+#define HEIGHT_STATUSBAR        (isFullScreen ? 44 : 20.0f)
+#define HEIGHT_DEFAULT_TABBAR   (isFullScreen ? 83 : 49)
+#define MAINTARBAR_HEIGHT       (isFullScreen ? 88 : 54)
+
+#define HEIGHT_NAVBAR           44.0f
+
+#define BORDER_WIDTH_1PX ([[UIScreen mainScreen] scale] > 0.0 ? 1.0 / [[UIScreen mainScreen] scale] : 1.0)
+
+#define YTURLSTR(urlString) [NSURL URLWithString:urlString]
+
+#define LXLocalizedString(key)   NSLocalizedString(key, nil)
+
+#define LXColor(r, g, b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1.0]
+
+#define DEFAULT_FRIEND_AVATAR    @"normal_friend_icon"
+#define DEFAULT_GROUP_AVATAR     @"normal_group_icon"
+
+#define LBXScan_Define_Native  //包含native库
+#define LBXScan_Define_ZXing   //包含ZXing库
+#define LBXScan_Define_ZBar   //包含ZBar库
+#define LBXScan_Define_UI     //包含界面库
+
+/** 定义通知 **/
+
+
+/** 自定义LOG **/
+
+#define MY_PROJECT_GLOBAL_CONTROL 0
+
+#if (MY_PROJECT_GLOBAL_CONTROL == 0)
+#define DLog(fmt, ...) NSLog((@"[文件名:%s]\n" "[函数名:%s]\n" "[行号:%d] \n" fmt), __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
+#define DeBugLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#define NSLog(...) NSLog(__VA_ARGS__);
+#define MyNSLog(FORMAT, ...) fprintf(stderr,"[%s]:[line %d行] %s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+#endif
+
+#if (MY_PROJECT_GLOBAL_CONTROL == 1)
+#define DLog(...)
+#define DeBugLog(...)
+#define NSLog(...)
+#define MyNSLog(FORMAT, ...) nil
+#endif
+
+//iphoneX / XS 375, 812
+#define iPhoneX_XS ((CGSizeEqualToSize(CGSizeMake(375, 812), [UIScreen mainScreen].bounds.size)) || (CGSizeEqualToSize(CGSizeMake(812, 375), [UIScreen mainScreen].bounds.size)))
+
+//iPhoneXR / iPhoneXSMax
+#define  isIphoneXR_XSMax   ((CGSizeEqualToSize(CGSizeMake(414, 896), [UIScreen mainScreen].bounds.size)) || (CGSizeEqualToSize(CGSizeMake(896, 414), [UIScreen mainScreen].bounds.size)))
+
+//异性全面屏
+#define  isFullScreen  (iPhoneX_XS || isIphoneXR_XSMax)
